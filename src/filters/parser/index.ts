@@ -27,7 +27,7 @@ const coincidentFilterToFilterPrimitives = (
   let scalarOperator = operator
   let relationalFilter
 
-  if (operator.includes(RELATION_SCALAR_SEPARATOR))
+  if (operator?.includes(RELATION_SCALAR_SEPARATOR))
     [relationalFilter, scalarOperator] = operator.split(RELATION_SCALAR_SEPARATOR)
 
   let singleValueOrListValue: string | string[] = value
@@ -53,6 +53,10 @@ const coincidentFilterToFilterPrimitives = (
 
 export function filtersDSLParser (filtersSentence: string | undefined): FilterPrimitives[] {
   if (filtersSentence === undefined) return []
+
+  // TODO --- The regex should match and group all the parts of the DSL
+  // to ensure the filter is valid. Then we should remove the checks for
+  // each part of the DSL since it matched therefore is a valid part.
 
   const filterSentenceCoincidences = [
     ...filtersSentence.matchAll(LOGIC_OPERATORS_WITH_SPACES_REGEX)

@@ -8,6 +8,8 @@ export const checkScalarOperator = (
 ): filterProspect is Omit<FilterPrimitives, 'operator'> & {
   operator: PrismaScalarOperator
 } => {
+  if (filterProspect.operator === undefined) return false
+
   if (!(expectedType in PRISMA_OPERATORS_BY_GROUP.types))
     return false
 

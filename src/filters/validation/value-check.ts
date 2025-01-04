@@ -24,7 +24,7 @@ export function checkValue (
   const { value, operator } = filterProspect
   const { expectedType } = filterRule
 
-  // This logic is bad because it doesn't check the relational filters
+  if (operator === undefined) return validationError(undefined)
 
   const isOperatorAListOperator = (PRISMA_COMMON_LIST_OPERATORS as readonly string[])
     .includes(operator)

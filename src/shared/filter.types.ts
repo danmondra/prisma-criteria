@@ -7,11 +7,11 @@ import {
 } from '../filters/validation/types'
 
 export type FilterPrimitives = {
-  field: string
-  logicOperator: string
+  field: string | undefined
+  logicOperator: string | undefined
   relationalFilter?: string | undefined
-  operator: string
-  value: string | string[]
+  operator: string | undefined
+  value: string | string[] | undefined
 }
 
 export type Filter<PR extends PrismaFilterRule = PrismaFilterRule> = {

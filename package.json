@@ -1,10 +1,11 @@
 {
   "name": "prisma-criteria",
   "version": "1.0.1",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc -p tsconfig.json",
+    "build": "rimraf ./dist && tsc -p tsconfig.prod.json",
     "start": "npm run build && node ./dist/src/example.js",
+    "npm-publish": "npm run build && cp package.json ./dist/src/ && npm publish ./dist/src/",
     "test": "vitest"
   },
   "keywords": ["prisma", "query-parser", "query-validator", "dynamic-queries", "prisma-orm"],

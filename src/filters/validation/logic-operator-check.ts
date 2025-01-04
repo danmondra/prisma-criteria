@@ -7,6 +7,8 @@ export function checkLogicOperator (
 ): filterProspect is Omit<FilterPrimitives, 'logicOperator'> & {
   logicOperator: PrismaLogicOperator
 } {
+  if (filterProspect.logicOperator === undefined) return false
+
   const isValidLogicOperator = (Object.values(
     PRISMA_LOGIC_OPERATORS
   ) as string[])

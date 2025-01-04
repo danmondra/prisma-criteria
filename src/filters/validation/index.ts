@@ -21,6 +21,8 @@ export const validateFilters = (
   const evaluateFilterProspect = (
     filterProspect: FilterPrimitives
   ): false | Filter => {
+    if (filterProspect.field === undefined) return false
+
     const filterRule = filterRules
       .find((fR) => fR.field === filterProspect.field)
     if (filterRule === undefined) return false
