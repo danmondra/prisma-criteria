@@ -1,0 +1,46 @@
+{
+  "name": "prisma-criteria",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf ./dist && tsc -p tsconfig.json",
+    "start": "npm run build && node ./dist/src/example.js",
+    "test": "vitest"
+  },
+  "keywords": ["prisma", "query-parser", "query-validator", "dynamic-queries", "prisma-orm"],
+  "license": "ISC",
+  "description": "Parses, validates, and creates a criteria object that can be passed to the Prisma \"findMany\" method to query a list of resources matching the given filters, pagination and order.",
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "rimraf": "^6.0.1",
+    "ts-standard": "^12.0.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/ts-standard/eslintrc.json"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "projectFolderIgnoreList": [
+        "./dist"
+      ]
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "radix": "error",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/no-misused-promises": "off",
+      "@typescript-eslint/no-extraneous-class": "off",
+      "@typescript-eslint/strict-boolean-expressions": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "curly": [
+        "error",
+        "multi-or-nest"
+      ]
+    }
+  }
+}

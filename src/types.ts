@@ -1,0 +1,48 @@
+import { PrismaFilterRule, PrismaLogicOperator } from './filters/validation/types'
+import { XOR } from './shared/utility.types'
+
+export type PrismaCriteria = {
+  where: PrismaWhereStatement
+  orderBy: Record<string, 'asc' | 'desc'> | undefined
+} & ({ take: number | undefined, skip: number | undefined }) // | { take: undefined, skip: undefined })
+
+export type UserInputCriteria = Partial<{
+  filters: string
+  orderBy: string
+  orderDir: string
+  pageNumber: string
+  pageSize: string
+}> & { [k: string]: string | undefined }
+
+export type PrismaCriteriaOptions = {
+  rules: {
+    allowedFilters: PrismaFilterRule[]
+    allowedFieldsToOrderBy: string[]
+    pageSizeMax: number
+  }
+  defaults?: {
+    filters?: PrismaWhereStatement
+    orderBy?: PrismaCriteria['orderBy']
+    pagination?: { pageSize: number, pageNumber: number }
+  }
+}
+
+export type PrismaWhereSelfStatement = {
+  [x: string]: {
+    [x: string]: unknown
+  }
+}
+
+export type PrismaWhereRelationStatement = {
+  [x: string]: {
+    [x: string]: {
+      [x: string]: unknown
+    }
+  }
+}
+
+export type PrismaWhereFilter = XOR<PrismaWhereSelfStatement, PrismaWhereRelationStatement>
+
+export type PrismaWhereStatement = {
+  [LogOp in PrismaLogicOperator]?: PrismaWhereFilter[]
+}
