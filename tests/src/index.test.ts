@@ -1,6 +1,6 @@
 import { assert, describe, expect, test } from 'vitest'
-import { PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from '../../src/types'
-import { createPrismaCriteria } from '../../src'
+import { PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from '../../src/types.js'
+import { createPrismaCriteria } from '../../src/index.js'
 
 describe('createPrismaCriteria', () => {
   describe('the filters', () => {

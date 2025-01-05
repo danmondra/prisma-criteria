@@ -1,4 +1,4 @@
-import { PRISMA_LOGIC_OPERATORS } from '../validation/consts'
+import { PRISMA_LOGIC_OPERATORS } from '../validation/consts.js'
 
 export const FILTER_SEPARATOR = ' '
 export const LIST_START = '['

@@ -1,4 +1,4 @@
-import { Validation, validationError, validationOk } from './validation.util'
+import { Validation, validationError, validationOk } from './validation.util.js'
 
 export const stringToNumber = (
   stringProspect: string | undefined

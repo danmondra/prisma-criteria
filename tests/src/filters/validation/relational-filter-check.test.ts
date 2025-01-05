@@ -1,6 +1,6 @@
 import { assert, describe, expect, test } from 'vitest'
-import { PRISMA_LOGIC_OPERATORS, PRISMA_RELATION_FILTERS_BY_SIDE, PRISMA_SCALAR_OPERATORS } from '../../../../src/filters/validation/consts'
-import { checkRelationalFilter } from '../../../../src/filters/validation/relational-filter-check'
+import { PRISMA_LOGIC_OPERATORS, PRISMA_RELATION_FILTERS_BY_SIDE, PRISMA_SCALAR_OPERATORS } from '../../../../src/filters/validation/consts.js'
+import { checkRelationalFilter } from '../../../../src/filters/validation/relational-filter-check.js'
 
 describe('checkRelationalFilter', () => {
   test.for([

@@ -1,6 +1,6 @@
-import { FilterPrimitives } from '../../shared/filter.types'
-import { PRISMA_OPERATORS_BY_GROUP } from './consts'
-import { PrismaFilterRule, PrismaScalarOperator } from './types'
+import { FilterPrimitives } from '../../shared/filter.types.js'
+import { PRISMA_OPERATORS_BY_GROUP } from './consts.js'
+import { PrismaFilterRule, PrismaScalarOperator } from './types.js'
 
 export const checkScalarOperator = (
   filterProspect: FilterPrimitives,

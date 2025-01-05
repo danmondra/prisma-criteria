@@ -1,10 +1,10 @@
-import { FilterPrimitives, Filter } from '../../shared/filter.types'
-import { PrismaFilterRule, PrismaRelationFilter, PrismaRelationFilterRule } from './types'
-import { checkScalarOperator } from './scalar-operator-check'
-import { checkLogicOperator } from './logic-operator-check'
-import { checkValue } from './value-check'
-import { isValidationErr } from '../../shared/validation.util'
-import { checkRelationalFilter } from './relational-filter-check'
+import { FilterPrimitives, Filter } from '../../shared/filter.types.js'
+import { PrismaFilterRule, PrismaRelationFilter, PrismaRelationFilterRule } from './types.js'
+import { checkScalarOperator } from './scalar-operator-check.js'
+import { checkLogicOperator } from './logic-operator-check.js'
+import { checkValue } from './value-check.js'
+import { isValidationErr } from '../../shared/validation.util.js'
+import { checkRelationalFilter } from './relational-filter-check.js'
 
 export const isIntendedToBeARelationalFilter = (
   filterRule: PrismaFilterRule

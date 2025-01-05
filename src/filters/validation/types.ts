@@ -1,11 +1,11 @@
-import { XOR, ObjectValues } from '../../shared/utility.types'
-import { RELATION_SCALAR_SEPARATOR } from '../parser/dsl.consts'
+import { XOR, ObjectValues } from '../../shared/utility.types.js'
+import { RELATION_SCALAR_SEPARATOR } from '../parser/dsl.consts.js'
 import {
   PRISMA_RELATION_FILTERS_BY_SIDE,
   PRISMA_LOGIC_OPERATORS,
   PRISMA_SCALAR_OPERATORS,
   PRISMA_OPERATORS_BY_GROUP
-} from './consts'
+} from './consts.js'
 
 export type PrismaLogicOperator = ObjectValues<
   typeof PRISMA_LOGIC_OPERATORS

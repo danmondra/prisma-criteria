@@ -1,8 +1,8 @@
-import { PrismaWhereStatement, UserInputCriteria } from '../types'
-import { filtersToPrismaWhere } from './converter/filters-to-prisma-converter'
-import { filtersDSLParser } from './parser'
-import { validateFilters } from './validation'
-import { PrismaFilterRule } from './validation/types'
+import { PrismaWhereStatement, UserInputCriteria } from '../types.js'
+import { filtersToPrismaWhere } from './converter/filters-to-prisma-converter.js'
+import { filtersDSLParser } from './parser/index.js'
+import { validateFilters } from './validation/index.js'
+import { PrismaFilterRule } from './validation/types.js'
 
 export function processUserInputFilters (
   userInputFilters: UserInputCriteria['filters'],

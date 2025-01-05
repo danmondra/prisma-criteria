@@ -1,5 +1,5 @@
-import { Validation, validationError, validationOk } from '../../../shared/validation.util'
-import { PrismaScalarType } from '../types'
+import { Validation, validationError, validationOk } from '../../../shared/validation.util.js'
+import { PrismaScalarType } from '../types.js'
 
 type TypeValidationsAndTransformations =
   Record<PrismaScalarType, (value: string) => Validation<undefined, unknown>>

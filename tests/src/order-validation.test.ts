@@ -1,6 +1,6 @@
 import { assert, describe, expect, test } from 'vitest'
-import { validateOrder } from '../../src/order-validation'
-import { isValidationErr, isValidationOk } from '../../src/shared/validation.util'
+import { validateOrder } from '../../src/order-validation.js'
+import { isValidationErr, isValidationOk } from '../../src/shared/validation.util.js'
 
 describe('validateOrder', () => {
   describe('should return a successful validation and an object containing the generated orderBy if the field is included in the allowed list', () => {

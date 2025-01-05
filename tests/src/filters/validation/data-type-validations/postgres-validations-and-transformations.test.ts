@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest'
-import { isValidationErr, isValidationOk, Validation } from '../../../../../src/shared/validation.util'
+import { isValidationErr, isValidationOk, Validation } from '../../../../../src/shared/validation.util.js'
 import assert from 'assert'
 import {
   POSTGRES_VALIDATIONS_AND_TRANSFORMATIONS as P
-} from '../../../../../src/filters/validation/data-type-validations/postgres-validations-and-transformations'
+} from '../../../../../src/filters/validation/data-type-validations/postgres-validations-and-transformations.js'
 
 const shouldReturnValidationErrorIfParameterIsNotString = (
   validationFn: (v: string) => Validation<undefined, unknown>

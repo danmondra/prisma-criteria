@@ -1,8 +1,8 @@
-import { FilterPrimitives } from '../../shared/filter.types'
-import { PrismaFilterRule, PrismaScalarType } from './types'
-import { PRISMA_COMMON_LIST_OPERATORS } from './consts'
-import { POSTGRES_VALIDATIONS_AND_TRANSFORMATIONS } from './data-type-validations/postgres-validations-and-transformations'
-import { isValidationOk, Validation, validationError, validationOk } from '../../shared/validation.util'
+import { FilterPrimitives } from '../../shared/filter.types.js'
+import { PrismaFilterRule, PrismaScalarType } from './types.js'
+import { PRISMA_COMMON_LIST_OPERATORS } from './consts.js'
+import { POSTGRES_VALIDATIONS_AND_TRANSFORMATIONS } from './data-type-validations/postgres-validations-and-transformations.js'
+import { isValidationOk, Validation, validationError, validationOk } from '../../shared/validation.util.js'
 
 export const validateValue = (
   value: string,

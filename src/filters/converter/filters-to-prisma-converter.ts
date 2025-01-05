@@ -1,16 +1,16 @@
-import { Filter } from '../../shared/filter.types'
+import { Filter } from '../../shared/filter.types.js'
 import {
   PrismaLogicOperator,
   PrismaRelationFilterRule,
   PrismaScalarFilterRule
-} from '../validation/types'
-import { Prettify } from '../../shared/utility.types'
+} from '../validation/types.js'
+import { Prettify } from '../../shared/utility.types.js'
 import {
   PrismaWhereFilter,
   PrismaWhereRelationStatement,
   PrismaWhereSelfStatement,
   PrismaWhereStatement
-} from '../../types'
+} from '../../types.js'
 
 export const isRelationFilter = (
   filter: Filter

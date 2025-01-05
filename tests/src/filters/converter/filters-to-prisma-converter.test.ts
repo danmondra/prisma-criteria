@@ -1,6 +1,5 @@
 import { describe, test } from 'vitest'
-import { PrismaCriteria, PrismaCriteriaOptions, UserInputCriteria } from '../../../../src/types'
-import { filtersToPrismaWhere } from '../../../../src/filters/converter/filters-to-prisma-converter'
+import { PrismaCriteria, PrismaCriteriaOptions, UserInputCriteria } from '../../../../src/types.js'
 
 /* This test will be completelly implemented after the DSL implementation stops changing */
 

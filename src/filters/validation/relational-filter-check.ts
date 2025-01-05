@@ -1,6 +1,6 @@
-import { FilterPrimitives } from '../../shared/filter.types'
-import { PRISMA_RELATION_FILTERS_BY_SIDE } from './consts'
-import { PrismaRelationFilter, PrismaRelationFilterRule } from './types'
+import { FilterPrimitives } from '../../shared/filter.types.js'
+import { PRISMA_RELATION_FILTERS_BY_SIDE } from './consts.js'
+import { PrismaRelationFilter, PrismaRelationFilterRule } from './types.js'
 
 export const checkRelationalFilter = (
   filterProspect: FilterPrimitives,

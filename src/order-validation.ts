@@ -1,5 +1,5 @@
-import { Validation, validationError, validationOk } from './shared/validation.util'
-import { PrismaCriteria } from './types'
+import { Validation, validationError, validationOk } from './shared/validation.util.js'
+import { PrismaCriteria } from './types.js'
 
 export function validateOrder (
   orderByProspect: string | undefined,

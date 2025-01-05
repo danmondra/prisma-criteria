@@ -1,6 +1,6 @@
 import { assert, describe, expect, test } from 'vitest'
-import { checkScalarOperator } from '../../../../src/filters/validation/scalar-operator-check'
-import { PRISMA_COMMON_SCALAR_OPERATORS, PRISMA_OPERATORS_BY_GROUP } from '../../../../src/filters/validation/consts'
+import { checkScalarOperator } from '../../../../src/filters/validation/scalar-operator-check.js'
+import { PRISMA_COMMON_SCALAR_OPERATORS, PRISMA_OPERATORS_BY_GROUP } from '../../../../src/filters/validation/consts.js'
 
 const PRISMA_OPERATORS_BY_TYPES = PRISMA_OPERATORS_BY_GROUP.types
 

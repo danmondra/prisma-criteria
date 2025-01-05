@@ -1,6 +1,6 @@
-import { PRISMA_LOGIC_OPERATORS } from './consts'
-import { FilterPrimitives } from '../../shared/filter.types'
-import { PrismaLogicOperator } from './types'
+import { PRISMA_LOGIC_OPERATORS } from './consts.js'
+import { FilterPrimitives } from '../../shared/filter.types.js'
+import { PrismaLogicOperator } from './types.js'
 
 export function checkLogicOperator (
   filterProspect: FilterPrimitives

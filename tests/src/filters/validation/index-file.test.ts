@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
-import { PrismaRelationFilterRule, PrismaScalarFilterRule } from '../../../../src/filters/validation/types'
-import { isIntendedToBeARelationalFilter } from '../../../../src/filters/validation'
+import { PrismaRelationFilterRule, PrismaScalarFilterRule } from '../../../../src/filters/validation/types.js'
+import { isIntendedToBeARelationalFilter } from '../../../../src/filters/validation/index.js'
 
 describe('isIntendedToBeARelationalFilter', () => {
   test('should return true if the provided rule contains the required properties to be a relational field', () => {

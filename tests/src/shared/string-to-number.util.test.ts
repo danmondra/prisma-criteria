@@ -1,6 +1,6 @@
 import { assert, describe, expect, test } from 'vitest'
-import { stringToNumber } from '../../../src/shared/string-to-number.util'
-import { isValidationErr, isValidationOk } from '../../../src/shared/validation.util'
+import { stringToNumber } from '../../../src/shared/string-to-number.util.js'
+import { isValidationErr, isValidationOk } from '../../../src/shared/validation.util.js'
 import { format } from 'util'
 
 describe('stringToNumber', () => {

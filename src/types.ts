@@ -1,5 +1,5 @@
-import { PrismaFilterRule, PrismaLogicOperator } from './filters/validation/types'
-import { XOR } from './shared/utility.types'
+import { PrismaFilterRule, PrismaLogicOperator } from './filters/validation/types.js'
+import { XOR } from './shared/utility.types.js'
 
 export type PrismaCriteria = {
   where: PrismaWhereStatement

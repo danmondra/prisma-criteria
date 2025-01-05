@@ -1,4 +1,4 @@
-import { FilterPrimitives } from '../../shared/filter.types'
+import { FilterPrimitives } from '../../shared/filter.types.js'
 import {
   FILTER_SEPARATOR,
   LIST_ELEMENTS_SEPARATOR,
@@ -6,7 +6,7 @@ import {
   LIST_START,
   LOGIC_OPERATORS_WITH_SPACES_REGEX,
   RELATION_SCALAR_SEPARATOR
-} from './dsl.consts'
+} from './dsl.consts.js'
 
 const coincidentFilterToFilterPrimitives = (
   filterCoincidence: RegExpExecArray,

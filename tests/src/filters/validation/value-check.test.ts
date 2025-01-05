@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest'
-import { checkValue, validateValue } from '../../../../src/filters/validation/value-check'
+import { checkValue, validateValue } from '../../../../src/filters/validation/value-check.js'
 import assert from 'assert'
-import { PRISMA_COMMON_LIST_OPERATORS, PRISMA_LOGIC_OPERATORS, PRISMA_OPERATORS_BY_GROUP, PRISMA_SCALAR_OPERATORS } from '../../../../src/filters/validation/consts'
-import { isValidationErr, isValidationOk } from '../../../../src/shared/validation.util'
+import { PRISMA_COMMON_LIST_OPERATORS, PRISMA_LOGIC_OPERATORS, PRISMA_OPERATORS_BY_GROUP, PRISMA_SCALAR_OPERATORS } from '../../../../src/filters/validation/consts.js'
+import { isValidationErr, isValidationOk } from '../../../../src/shared/validation.util.js'
 
 type PrismaTypes = keyof typeof PRISMA_OPERATORS_BY_GROUP.types
   type TestParameters = Array<{ expectedType: PrismaTypes, valuesToTest: string[] }>

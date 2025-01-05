@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
-import { checkLogicOperator } from '../../../../src/filters/validation/logic-operator-check'
-import { PRISMA_LOGIC_OPERATORS } from '../../../../src/filters/validation/consts'
+import { checkLogicOperator } from '../../../../src/filters/validation/logic-operator-check.js'
+import { PRISMA_LOGIC_OPERATORS } from '../../../../src/filters/validation/consts.js'
 
 const LOGIC_OPERATORS = Object.values(PRISMA_LOGIC_OPERATORS)
 

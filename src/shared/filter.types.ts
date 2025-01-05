@@ -4,7 +4,7 @@ import {
   PrismaRelationFilter,
   PrismaRelationFilterRule,
   PrismaScalarOperator
-} from '../filters/validation/types'
+} from '../filters/validation/types.js'
 
 export type FilterPrimitives = {
   field: string | undefined

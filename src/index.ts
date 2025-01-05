@@ -1,9 +1,9 @@
-import { isValidationOk } from './shared/validation.util'
-import { validateOrder } from './order-validation'
-import { PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from './types'
-import { processUserInputFilters } from './filters'
-import { stringToNumber } from './shared/string-to-number.util'
-import { PRISMA_LOGIC_OPERATORS } from './filters/validation/consts'
+import { isValidationOk } from './shared/validation.util.js'
+import { validateOrder } from './order-validation.js'
+import { PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from './types.js'
+import { processUserInputFilters } from './filters/index.js'
+import { stringToNumber } from './shared/string-to-number.util.js'
+import { PRISMA_LOGIC_OPERATORS } from './filters/validation/consts.js'
 
 export function createPrismaCriteria (
   userInputCriteria: UserInputCriteria,

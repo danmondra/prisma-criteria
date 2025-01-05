@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { isValidationErr, isValidationOk, validationError, validationOk } from '../../../src/shared/validation.util'
+import { isValidationErr, isValidationOk, validationError, validationOk } from '../../../src/shared/validation.util.js'
 
 describe('validation utility', () => {
   describe('validationError', () => {
