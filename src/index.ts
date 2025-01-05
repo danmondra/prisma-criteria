@@ -23,8 +23,13 @@ export function createPrismaCriteria (
   if (criteriaOptions.rules.allowedFieldsToOrderBy.length > 1)
     throw new Error('You can only order by one field (for now).')
 
+  const onlyStringUserInputs = Object.fromEntries(
+    Object.entries(userInputCriteria)
+      .filter(entry => typeof entry[1] === 'string')
+  )
+
   const processedUserInputFilters = processUserInputFilters(
-    userInputCriteria.filters,
+    onlyStringUserInputs.filters,
     criteriaOptions.rules.allowedFilters
   )
 
@@ -47,8 +52,8 @@ export function createPrismaCriteria (
 
   let orderBy = defaultOrderBy
   const validationOfUsersInputOrderBy = validateOrder(
-    userInputCriteria.orderBy,
-    userInputCriteria.orderDir,
+    onlyStringUserInputs.orderBy,
+    onlyStringUserInputs.orderDir,
     criteriaOptions.rules.allowedFieldsToOrderBy
   )
   if (isValidationOk(validationOfUsersInputOrderBy))
@@ -56,7 +61,7 @@ export function createPrismaCriteria (
 
   let skip = defaultPagination ? defaultPagination.pageNumber - 1 : undefined
   const validationOfUsersInputPageNumber = stringToNumber(
-    userInputCriteria.pageNumber
+    onlyStringUserInputs.pageNumber
   )
   if (
     isValidationOk(validationOfUsersInputPageNumber) &&
@@ -65,7 +70,7 @@ export function createPrismaCriteria (
 
   let take = defaultPagination?.pageSize
   const validationOfUsersInputPageSize = stringToNumber(
-    userInputCriteria.pageSize
+    onlyStringUserInputs.pageSize
   )
   if (
     isValidationOk(validationOfUsersInputPageSize) &&
