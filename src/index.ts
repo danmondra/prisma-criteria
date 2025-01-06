@@ -50,6 +50,11 @@ export function createPrismaCriteria (
     }
   }, {})
 
+  // TODO --- improve this
+  const thereAreFilters = Object
+    .values(mixedFiltersProvidedByUserAndDefaultFilters)
+    .some((logicOperatorFilters) => logicOperatorFilters.length > 0)
+
   let orderBy = defaultOrderBy
   const validationOfUsersInputOrderBy = validateOrder(
     onlyStringUserInputs.orderBy,
@@ -83,7 +88,9 @@ export function createPrismaCriteria (
   }
 
   return {
-    where: mixedFiltersProvidedByUserAndDefaultFilters,
+    where: !thereAreFilters && userInputCriteria.filters?.length
+      ? { OR: [] }
+      : mixedFiltersProvidedByUserAndDefaultFilters,
     orderBy,
     skip,
     take
