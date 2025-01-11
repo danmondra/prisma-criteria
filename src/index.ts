@@ -5,6 +5,8 @@ import { processUserInputFilters } from './filters/index.js'
 import { stringToNumber } from './shared/string-to-number.util.js'
 import { PRISMA_LOGIC_OPERATORS } from './filters/validation/consts.js'
 
+export { type UserInputCriteria, type PrismaCriteriaOptions }
+
 export function createPrismaCriteria (
   userInputCriteria: UserInputCriteria,
   criteriaOptions: PrismaCriteriaOptions
