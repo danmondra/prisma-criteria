@@ -35,7 +35,7 @@ export function createPrismaCriteria (
     criteriaOptions.rules.allowedFilters
   )
 
-  const mixedFiltersProvidedByUserAndDefaultFilters = (
+  const userProvidedAndDefaultFilters = (
     Object.values(PRISMA_LOGIC_OPERATORS)
   ).reduce<PrismaWhereStatement>((acc, logicOperator) => {
     const isPresentInDefaultFilters = Object.hasOwn(defaultFilters ?? {}, logicOperator)
@@ -51,11 +51,6 @@ export function createPrismaCriteria (
       ]
     }
   }, {})
-
-  // TODO --- improve this
-  const thereAreFilters = Object
-    .values(mixedFiltersProvidedByUserAndDefaultFilters)
-    .some((logicOperatorFilters) => logicOperatorFilters.length > 0)
 
   let orderBy = defaultOrderBy
   const validationOfUsersInputOrderBy = validateOrder(
@@ -89,10 +84,16 @@ export function createPrismaCriteria (
     )
   }
 
+  const doesUserProvideFilters = userInputCriteria.filters?.length === 0
+  const thereAreValidFilters = Object
+    .values(userProvidedAndDefaultFilters)
+    .some((logicOperatorFilters) => logicOperatorFilters.length > 0)
+
   return {
-    where: !thereAreFilters && userInputCriteria.filters?.length
+    where: !doesUserProvideFilters || !thereAreValidFilters
+      // The criteria is invalid or empty and should ignore the where clause
       ? { OR: [] }
-      : mixedFiltersProvidedByUserAndDefaultFilters,
+      : userProvidedAndDefaultFilters,
     orderBy,
     skip,
     take
