@@ -1,9 +1,10 @@
 import { isValidationOk } from './shared/validation.util.js'
 import { validateOrder } from './order-validation.js'
-import { PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from './types.js'
+import { PaginationClauses, PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from './types.js'
 import { processUserInputFilters } from './filters/index.js'
 import { stringToNumber } from './shared/string-to-number.util.js'
 import { PRISMA_LOGIC_OPERATORS } from './filters/validation/consts.js'
+import assert from 'assert'
 
 export { type UserInputCriteria, type PrismaCriteriaOptions }
 
@@ -84,18 +85,38 @@ export function createPrismaCriteria (
     )
   }
 
-  const doesUserProvideFilters = userInputCriteria.filters?.length === 0
+  const didUserProvideFilters = userInputCriteria.filters?.length === 0
   const thereAreValidFilters = Object
     .values(userProvidedAndDefaultFilters)
     .some((logicOperatorFilters) => logicOperatorFilters.length > 0)
 
+  const whereClause: Partial<{ where: PrismaCriteria['where'] }> = {}
+
+  switch (true) {
+    // Doesn't return any match
+    case (didUserProvideFilters && !thereAreValidFilters):
+      whereClause.where = { OR: [] }
+      break
+
+    // Ignores the where clause (as if it were not provided)
+    case (!didUserProvideFilters):
+      whereClause.where = { AND: [] }
+      break
+
+    // return the matched places with the filters
+    case (thereAreValidFilters):
+      whereClause.where = userProvidedAndDefaultFilters
+      break
+
+    default: assert.fail('Shouln\'t reach this point')
+  }
+
+  const skipAndTakeclauses: PaginationClauses =
+    skip && take ? { skip, take } : {}
+
   return {
-    where: !doesUserProvideFilters || !thereAreValidFilters
-      // The criteria is invalid or empty and should ignore the where clause
-      ? { OR: [] }
-      : userProvidedAndDefaultFilters,
+    ...whereClause,
     orderBy,
-    skip,
-    take
+    ...skipAndTakeclauses
   }
 }

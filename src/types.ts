@@ -2,9 +2,10 @@ import { PrismaFilterRule, PrismaLogicOperator } from './filters/validation/type
 import { XOR } from './shared/utility.types.js'
 
 export type PrismaCriteria = {
-  where: PrismaWhereStatement
+  where?: PrismaWhereStatement
   orderBy: Record<string, 'asc' | 'desc'> | undefined
-} & ({ take: number | undefined, skip: number | undefined }) // | { take: undefined, skip: undefined })
+} & PaginationClauses
+export type PaginationClauses = ({ take: number, skip: number } | { take?: never, skip?: never })
 
 export type UserInputCriteria = Partial<{
   filters: string

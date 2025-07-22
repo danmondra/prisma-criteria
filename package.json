@@ -1,6 +1,6 @@
 {
   "name": "prisma-criteria",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "exports": "./index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.prod.json",
