@@ -4,8 +4,9 @@ import { XOR } from './shared/utility.types.js'
 export type PrismaCriteria = {
   where?: PrismaWhereStatement
   orderBy: Record<string, 'asc' | 'desc'> | undefined
-} & PaginationClauses
-export type PaginationClauses = ({ take: number, skip: number } | { take?: never, skip?: never })
+  take?: number
+  skip?: number
+}
 
 export type UserInputCriteria = Partial<{
   filters: string

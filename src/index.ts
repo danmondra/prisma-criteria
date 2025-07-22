@@ -1,6 +1,6 @@
 import { isValidationOk } from './shared/validation.util.js'
 import { validateOrder } from './order-validation.js'
-import { PaginationClauses, PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from './types.js'
+import { PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from './types.js'
 import { processUserInputFilters } from './filters/index.js'
 import { stringToNumber } from './shared/string-to-number.util.js'
 import { PRISMA_LOGIC_OPERATORS } from './filters/validation/consts.js'
@@ -111,12 +111,10 @@ export function createPrismaCriteria (
     default: assert.fail('Shouln\'t reach this point')
   }
 
-  const skipAndTakeclauses: PaginationClauses =
-    skip && take ? { skip, take } : {}
-
   return {
     ...whereClause,
     orderBy,
-    ...skipAndTakeclauses
+    skip,
+    take
   }
 }
