@@ -62,15 +62,6 @@ export function createPrismaCriteria (
   if (isValidationOk(validationOfUsersInputOrderBy))
     orderBy = validationOfUsersInputOrderBy.ok.orderBy
 
-  let skip = defaultPagination ? defaultPagination.pageNumber - 1 : undefined
-  const validationOfUsersInputPageNumber = stringToNumber(
-    onlyStringUserInputs.pageNumber
-  )
-  if (
-    isValidationOk(validationOfUsersInputPageNumber) &&
-    validationOfUsersInputPageNumber.ok > 0
-  ) skip = validationOfUsersInputPageNumber.ok - 1
-
   let take = defaultPagination?.pageSize
   const validationOfUsersInputPageSize = stringToNumber(
     onlyStringUserInputs.pageSize
@@ -84,6 +75,22 @@ export function createPrismaCriteria (
       criteriaOptions.rules.pageSizeMax
     )
   }
+
+  // Skip can be undefined, and take defined, but no the otherwise.
+  // Skip depends on "take", because:
+  // - If there is no "take" defined, it isn't possible to paginate.
+  // - If skip is 0, then doesn't matter if take is 20, page should stay 0.
+  let skip = defaultPagination && take
+    ? (defaultPagination.pageNumber - 1) * take
+    : undefined
+  const validationOfUsersInputPageNumber = stringToNumber(
+    onlyStringUserInputs.pageNumber
+  )
+  if (
+    isValidationOk(validationOfUsersInputPageNumber) &&
+    validationOfUsersInputPageNumber.ok > 0 &&
+    take
+  ) skip = (validationOfUsersInputPageNumber.ok - 1) * take
 
   const didUserProvideFilters = userInputCriteria.filters?.length === 0
   const thereAreValidFilters = Object

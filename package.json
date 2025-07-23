@@ -1,9 +1,10 @@
 {
   "name": "prisma-criteria",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "exports": "./index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc -p tsconfig.prod.json",
+    "compile": "tsc -p tsconfig.prod.json",
+    "build": "rimraf ./dist && npm run compile",
     "publish": "npm run build && cp package.json ./dist/src/ && npm publish ./dist/src/",
     "test": "vitest"
   },
