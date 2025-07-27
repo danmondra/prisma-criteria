@@ -92,7 +92,7 @@ export function createPrismaCriteria (
     take
   ) skip = (validationOfUsersInputPageNumber.ok - 1) * take
 
-  const didUserProvideFilters = userInputCriteria.filters?.length === 0
+  const didUserProvideFilters = userInputCriteria.filters?.length !== 0
   const thereAreValidFilters = Object
     .values(userProvidedAndDefaultFilters)
     .some((logicOperatorFilters) => logicOperatorFilters.length > 0)
