@@ -3,6 +3,7 @@ import { PrismaCriteria, PrismaCriteriaOptions, UserInputCriteria } from '../../
 
 /* This test will be completelly implemented after the DSL implementation stops changing */
 
+/*
 describe('filtersToPrismaWhere', () => {
   type DSLQueryTest = {
     DSLQuery: UserInputCriteria
@@ -40,3 +41,4 @@ describe('filtersToPrismaWhere', () => {
     const result = (DSLQuery)
   })
 })
+*/

@@ -1,10 +1,10 @@
 import { isValidationOk } from './shared/validation.util.js'
 import { validateOrder } from './order-validation.js'
-import { PrismaCriteria, PrismaCriteriaOptions, PrismaWhereStatement, UserInputCriteria } from './types.js'
+import { NewPrismaWhereStatement3, PrismaCriteria, PrismaCriteriaOptions, PrismaIndividualCondition, PrismaWhereFilter, UserInputCriteria } from './types.js'
 import { processUserInputFilters } from './filters/index.js'
 import { stringToNumber } from './shared/string-to-number.util.js'
-import { PRISMA_LOGIC_OPERATORS } from './filters/validation/consts.js'
 import assert from 'assert'
+import { PRISMA_LOGIC_OPERATORS } from './filters/validation/consts.js'
 
 export { type UserInputCriteria, type PrismaCriteriaOptions }
 
@@ -35,23 +35,6 @@ export function createPrismaCriteria (
     onlyStringUserInputs.filters,
     criteriaOptions.rules.allowedFilters
   )
-
-  const userProvidedAndDefaultFilters = (
-    Object.values(PRISMA_LOGIC_OPERATORS)
-  ).reduce<PrismaWhereStatement>((acc, logicOperator) => {
-    const isPresentInDefaultFilters = Object.hasOwn(defaultFilters ?? {}, logicOperator)
-    const isPresentInProcessedFilters = Object.hasOwn(processedUserInputFilters, logicOperator)
-
-    if (!isPresentInDefaultFilters && !isPresentInProcessedFilters) return acc
-
-    return {
-      ...acc,
-      [logicOperator]: [
-        ...(isPresentInDefaultFilters ? defaultFilters![logicOperator]! : []),
-        ...(isPresentInProcessedFilters ? processedUserInputFilters[logicOperator]! : [])
-      ]
-    }
-  }, {})
 
   let orderBy = defaultOrderBy
   const validationOfUsersInputOrderBy = validateOrder(
@@ -92,28 +75,57 @@ export function createPrismaCriteria (
     take
   ) skip = (validationOfUsersInputPageNumber.ok - 1) * take
 
-  const didUserProvideFilters = userInputCriteria.filters?.length !== 0
-  const thereAreValidFilters = Object
-    .values(userProvidedAndDefaultFilters)
-    .some((logicOperatorFilters) => logicOperatorFilters.length > 0)
+  const userProvidedAndDefaultFilters: PrismaIndividualCondition[] = [
+    ...(defaultFilters ?? []),
+    ...(processedUserInputFilters ?? [])
+  ]
 
-  const whereClause: Partial<{ where: PrismaCriteria['where'] }> = {}
+  const didUserProvideFilters = userInputCriteria.filters?.length !== 0
+  const didUserProvideValidFilters = processUserInputFilters.length !== 0
+  const wereDefaultFiltersProvided = defaultFilters?.length !== 0
+
+  const whereClause: NewPrismaWhereStatement3 = { where: {} }
 
   switch (true) {
-    // Doesn't return any match
-    case (didUserProvideFilters && !thereAreValidFilters):
-      whereClause.where = { OR: [] }
-      break
-
-    // Ignores the where clause (as if it were not provided)
-    case (!didUserProvideFilters):
+    // Ignores the where clause (returns all the items)
+    case (!didUserProvideFilters && !wereDefaultFiltersProvided):
       whereClause.where = { AND: [] }
       break
 
-    // return the matched places with the filters
-    case (thereAreValidFilters):
-      whereClause.where = userProvidedAndDefaultFilters
+    // Doesn't return any match
+    case (
+      didUserProvideFilters &&
+      !didUserProvideValidFilters &&
+      !wereDefaultFiltersProvided
+    ):
+      whereClause.where = { OR: [] }
       break
+
+    // return the matched places with the filters
+    case (didUserProvideValidFilters || wereDefaultFiltersProvided): {
+      const andGroup: PrismaWhereFilter[] =
+        userProvidedAndDefaultFilters.map(individualCondition => {
+          const logicOperator = Object.keys(individualCondition)[0]
+          if (logicOperator !== PRISMA_LOGIC_OPERATORS.and) return false
+
+          const test: PrismaWhereFilter = Object.values(individualCondition)[0]!
+          return test
+        }).filter(test => test !== false)
+      const orGroup: PrismaWhereFilter[] =
+        userProvidedAndDefaultFilters.map(individualCondition => {
+          const logicOperator = Object.keys(individualCondition)[0]
+          if (logicOperator !== PRISMA_LOGIC_OPERATORS.or) return false
+
+          const test: PrismaWhereFilter = Object.values(individualCondition)[0]!
+          return test
+        }).filter(test => test !== false)
+
+      whereClause.where = {
+        ...(andGroup.length > 0 && { AND: andGroup }),
+        ...(orGroup.length > 0 && { OR: orGroup }) as any
+      }
+      break
+    }
 
     default: assert.fail('Shouln\'t reach this point')
   }

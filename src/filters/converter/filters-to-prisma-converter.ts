@@ -6,6 +6,7 @@ import {
 } from '../validation/types.js'
 import { Prettify } from '../../shared/utility.types.js'
 import {
+  PrismaIndividualCondition,
   PrismaWhereFilter,
   PrismaWhereRelationStatement,
   PrismaWhereSelfStatement,
@@ -69,6 +70,31 @@ export function filtersToPrismaWhere (
       filter.logicOperator,
       mapScalarFilter(filter as Filter<PrismaScalarFilterRule>)
     )
+  }
+
+  return prismaWhere
+}
+
+export function newFiltersToPrismaWhere (
+  filters: Filter[]
+): PrismaIndividualCondition[] {
+  const prismaWhere: PrismaIndividualCondition[] = []
+
+  for (const filter of filters) {
+    if (isRelationFilter(filter)) {
+      // WTF typescript?
+      // filter.logicOperator is a PrismaLogicOperator
+      // not a string!!!
+      prismaWhere.push({
+        [filter.logicOperator]: mapRelationalFilter(filter)
+      } as unknown as PrismaIndividualCondition)
+
+      continue
+    }
+
+    prismaWhere.push({
+      [filter.logicOperator]: mapScalarFilter(filter as Filter<PrismaScalarFilterRule>)
+    } as unknown as PrismaIndividualCondition)
   }
 
   return prismaWhere

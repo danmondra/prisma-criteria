@@ -8,7 +8,13 @@
     "publish": "npm run build && cp package.json ./dist/src/ && npm publish ./dist/src/",
     "test": "vitest"
   },
-  "keywords": ["prisma", "query-parser", "query-validator", "dynamic-queries", "prisma-orm"],
+  "keywords": [
+    "prisma",
+    "query-parser",
+    "query-validator",
+    "dynamic-queries",
+    "prisma-orm"
+  ],
   "license": "ISC",
   "description": "Parses, validates, and creates a criteria object that can be passed to the Prisma \"findMany\" method to query a list of resources matching the given filters, pagination and order.",
   "homepage": "https://github.com/danmondra/prisma-criteria",
@@ -18,7 +24,7 @@
     "@types/node": "^22.7.5",
     "rimraf": "^6.0.1",
     "ts-standard": "^12.0.2",
-    "typescript": "^5.6.3",
+    "typescript": "^5.8.3",
     "vitest": "^2.1.5"
   },
   "eslintConfig": {

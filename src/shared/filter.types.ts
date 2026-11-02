@@ -22,5 +22,5 @@ export type Filter<PR extends PrismaFilterRule = PrismaFilterRule> = {
   prismaRules: PR
 } & (PR extends PrismaRelationFilterRule
   ? { relationFilter: PrismaRelationFilter }
-  : { relationFilter?: undefined }
+  : { relationFilter?: never }
 )
